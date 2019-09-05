@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tws.repository.BoxMapper">
+
+    <select id="selectAllByStatus" resultType="tws.entity.Box">
+        select
+            *
+        from
+            box
+        where
+            1 = 1
+        <if test="status != ''">
+            and status = #{status};
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="tws.entity.OrderTable">
+        insert into
+            box (transForm, receiver, telNum, weight,status)
+        values
+            (#{o.transForm}, #{o.receiver}, #{o.telNum}, #{o.weight}, #{o.status});
+    </insert>
+
+    <update id="updatePatchPackageDateByOrderNum">
+        update
+            box
+        set
+            orderTime = #{date}
+        where
+            orderNum = #{num}
+    </update>
+</mapper>
